@@ -18,4 +18,7 @@ struct Film{
     std::string country;
     int date;
     std::vector<Role> roles;
+    std::string author;
+    std::string screenwriter;
+    std::string producer;
 };
