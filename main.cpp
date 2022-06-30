@@ -22,10 +22,11 @@ int main() {
     nlohmann::json dict;
 
     std::ifstream  file("film.json");
-    file >> dict;
-    file.close();
-    std::string str = "roles";
-    find(dict);
-
+    if(file.is_open()) {
+        file >> dict;
+        file.close();
+        std::string str = "roles";
+        find(dict);
+    }
     return 0;
 }
