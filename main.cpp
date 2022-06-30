@@ -2,39 +2,30 @@
 #include "nlohmann/json.hpp"
 #include "Film.h"
 #include <fstream>
-void fill(nlohmann::json &dict){
-    Film film;
-    film.name = "The Dark Knight";
-    dict["name"] = film.name;
-    film.date = 2008;
-    dict["date"] = film.date;
-    film.studio = "DC Comics";
-    dict["studio"] = film.studio;
-    film.country = "USA";
-    dict["county"] = film.country;
-    film.roles.emplace_back(Role{Actor{"Cristian"}, "Batman"});
-    film.roles.emplace_back(Role{Actor{"Hit"}, "Joker"});
-    nlohmann::json d;
-    film.author = "Bob";
-    dict["author"] = film.author;
-    film.producer = "Christopher";
-    dict["producer"] = film.producer;
-    film.screenwriter = "Christopher";
-    dict["screenwriter"] = film.screenwriter;
-    for(int i = 0; i < film.roles.size(); i++){
-        d[film.roles[i].actor.name] = film.roles[i].roleName;
+
+
+
+void find(nlohmann::json &dict){
+    std::cout << "Enter name of actor\n";
+    std::string name;
+    std::getline(std::cin, name);
+    for(auto i = dict.begin(); i != dict.end(); i++){
+        auto roles = (*i)["roles"];
+        auto actor = roles.find(name);
+        if(actor != roles.end()){
+            std::cout << "Name of film: " << i.key() << ", role of actor is: " << actor.value() << std::endl;
+        }
     }
-
-    dict["roles"] = d;
 }
-
 
 int main() {
     nlohmann::json dict;
-    fill(dict);
-    std::ofstream  file("film.json");
-    file << dict;
+
+    std::ifstream  file("film.json");
+    file >> dict;
     file.close();
+    std::string str = "roles";
+    find(dict);
 
     return 0;
 }

@@ -8,7 +8,7 @@ include_directories(SBCLion)
 
 add_subdirectory(nlohmann_json)
 
-add_executable(SBCLion main.cpp Film.h)
+add_executable(SBCLion main.cpp Film.h Fill.cpp)
 
 target_link_libraries(SBCLion PRIVATE nlohmann_json::nlohmann_json)
 
