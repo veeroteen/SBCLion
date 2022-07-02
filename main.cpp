@@ -22,11 +22,17 @@ int main() {
     nlohmann::json dict;
 
     std::ifstream  file("film.json");
+    try{
     if(file.is_open()) {
         file >> dict;
         file.close();
         std::string str = "roles";
         find(dict);
+    }
+    }
+    catch (...)
+    {
+        std::cerr << "Error parse json\n";
     }
     return 0;
 }
